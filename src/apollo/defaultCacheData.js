@@ -1,5 +1,6 @@
+import { emptyString } from 'utils/constants'
 import { emptyObject } from 'utils/constants'
-import { yourEntityPager, yourEntityListFilter } from './cacheKeyFunctions'
+import { yourEntityPager, yourEntityListFilter, emailKey } from './cacheKeyFunctions'
 
 // Here you define the default values for local apollo state (@client only values)
 // https://www.apollographql.com/docs/react/local-state/local-state-management/
@@ -14,7 +15,10 @@ const yourEntityDefaultPager = {
 }
 const yourEntityDefaultListFilter = emptyObject
 
+const defaultEmail = {email:emptyString}
+
 export const defaults = {
+  [emailKey]:defaultEmail,
   [yourEntityPager]: yourEntityDefaultPager,
   [yourEntityListFilter]: yourEntityDefaultListFilter
 }

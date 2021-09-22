@@ -14,8 +14,13 @@
   "Forbidden": "Not allowed to see this page!",
   "NavBar": {
     "MyFirstMenu":"My First Menu",
-    "Dashboard": "Dashboard",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "Welcome": "Welcome"
+  },
+  "LandingPage": {
+    "Title":"Welcome!",
+    "Subtitle":"Please enter your e-mail:",
+    "BadEmail": "This is not a valid email!"
   },
   "Tooltips": {
     "Logout": "Logout",
