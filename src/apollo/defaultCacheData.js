@@ -15,7 +15,7 @@ const yourEntityDefaultPager = {
 }
 const yourEntityDefaultListFilter = emptyObject
 
-const defaultEmail = {email:emptyString}
+const defaultEmail = {email:'asdfghj@asf.ro'}
 
 export const defaults = {
   [emailKey]:defaultEmail,

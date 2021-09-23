@@ -13,6 +13,7 @@ function Welcome() {
   //const addToast = useToast()
   //addToast('This is my toast', 'success')
   const { t } = useTranslation()
+  const [eValid, setEValid] = useState(true)
   const [emailSalvat, setEmailLaNivelDeAplicatie] = useEmail()
   const [email, setEmail] = useState(emailSalvat)
   const changeState = useCallback(
@@ -28,9 +29,18 @@ function Welcome() {
         setEmailLaNivelDeAplicatie(email)
       }
       else setEmailLaNivelDeAplicatie(emptyString)
+      setEValid(validateEmail(email))
     },
     [email, setEmailLaNivelDeAplicatie]
   );
+
+  const intermediarPentruFiltratEnter=useCallback(
+    (eveniment)=>{
+        if (eveniment.keyCode===13){
+          nuStiu()
+        }
+    }
+  )
 
   return (
     <Grid container direction="column" alignItems="center" spacing={10}>
@@ -42,7 +52,7 @@ function Welcome() {
           <Typography variant="caption">{t("LandingPage.Subtitle")} </Typography>
         </Grid>
         <Grid item>
-          <CustomTextField onChange={changeState} value={email}
+          <CustomTextField onChange={changeState} value={email} onKeyDown={intermediarPentruFiltratEnter}
             endAdornment={
               <InputAdornment position='end'>
                 <IconButton size='small' color='theme' aria-label='go' onClick={nuStiu}>
@@ -50,8 +60,8 @@ function Welcome() {
                 </IconButton>
               </InputAdornment>
             }
-            error={!validateEmail(email)}
-            helperText={!validateEmail(email)&& t("LandingPage.BadEmail")}
+            error={!eValid}
+            helperText={!eValid&& t("LandingPage.BadEmail")}
           />
         </Grid>
       </Grid>
