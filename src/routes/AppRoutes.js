@@ -9,7 +9,8 @@ import Welcome from 'features/welcome/Welcome'
 import Settings from 'features/settings/Settings'
 import { Forbidden, NotFound } from '@bit/totalsoft_oss.react-mui.kit.core'
 import { useEmail } from 'hooks/useEmail'
-import Conference from 'features/conference/ConferenceListContainer'
+import ConferenceListContainer from 'features/conference/ConferenceListContainer'
+import MyConferenceListContainer from 'features/myConference/list/MyConferenceListContainer'
 
 
 export default function AppRoutes() {
@@ -26,7 +27,8 @@ export default function AppRoutes() {
       <Switch>
         <CustomRoute isPrivate={false}exact path="/helloWorld" component={HelloWorld} />
         <CustomRoute isPrivate={false} exact path='/welcome' component={Welcome} />
-        <CustomRoute isPrivate={false} exact path='/conference' component={Conference} />
+        <CustomRoute isPrivate={false} exact path='/conference' component={ConferenceListContainer} />
+        <CustomRoute isPrivate={false} exact path='/myConference' component={MyConferenceListContainer} />
         <CustomRoute exact path='/settings' component={Settings} />
         <Redirect exact from='/' to='/welcome' />
         <CustomRoute isPrivate={false} exact path='/forbidden' component={Forbidden} />

@@ -9,7 +9,8 @@
     "Settings": "Setari",
     "User": "Profil",
     "Welcome" : "Bun Venit!",
-    "Conference": "Conferinte"
+    "Conference": "Conferinte",
+    "MyConferences": "Confereintele mele"
   },
 
   "LandingPage": {
@@ -28,10 +29,15 @@
     "Withdraw": "Retrage-te",
     "StatusNotSet": "Nu participi"
   },
+  "MyConferences": {
+    "Edit": "Editeaza",
+    "Delete":"Sterge"
+  },
   "General":{
     "Buttons":{
       "ApplyFilters" : "Aplica filtre",
-      "ResetFilters" : "Reseteaza filtre"
+      "ResetFilters" : "Reseteaza filtre",
+      "AddConference" : "Adauga Conferinta"
     }
   },
   "UserMenu": {
