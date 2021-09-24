@@ -19,7 +19,7 @@ function ConferenceFilters (props){
 
     const handleApplyButton = useCallback(() => onApplyFilters({ startDate, endDate }), [onApplyFilters, endDate, startDate])
     const handleResetButton = useCallback(() => onApplyFilters(generateDefaultFilters()), [onApplyFilters])
-    const handleKeyPressed = useCallback(({ keyCode }) => (keyCode === 13 && handleApplyButton()), [handleApplyButton])
+    const handleEnterPress = useCallback(event=>event.keyCode===13 && handleApplyButton(), [handleApplyButton])
 
     const {t} = useTranslation()
     return(
@@ -28,7 +28,7 @@ function ConferenceFilters (props){
             icon={SearchIcon} 
             iconColor='theme'
             content = {
-                <Grid container spacing={5}>
+                <Grid container spacing={5} onKeyDown={handleEnterPress}>
                     <Grid item> 
                         <DateTime
                             label={t("Conference.Filters.StartDate")}
