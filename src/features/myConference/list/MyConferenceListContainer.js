@@ -8,37 +8,39 @@ import { useHeader } from 'providers/AreasProvider'
 import AddButton from '@bit/totalsoft_oss.react-mui.add-button'
 import MyConferenceHeader from './MyConferenceHeader'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router'
 
 const MyConferenceListContainer = () => {
-    const {data, loading} = {data:conferences, loading:false}
+    const { data, loading } = { data: conferences, loading: false }
     const [filters, setFilters] = useState(generateDefaultFilters())
     const [, setHeader] = useHeader()
-    const{t} = useTranslation()
+    const { t } = useTranslation()
+    const history = useHistory()
 
-    useEffect(()=>{
+    const handleAddClick = useCallback(() => {
+        history.push('myConference/new')
+    }, [history])
+
+    useEffect(() => {
         //did mount
-        return ()=>{
+        return () => {
             //will unmount
             setHeader(null)
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         setHeader(
-        <MyConferenceHeader 
-            title={t('NavBar.MyConferences')}
-            actions={<AddButton title={t('NavBar.MyConferences')}></AddButton> }
+            <MyConferenceHeader
+                title={t('NavBar.MyConferences')}
+                actions={<AddButton title={t('NavBar.MyConferences')} onClick={handleAddClick} />}
             />)
-        
-        return()=>{
+
+        return () => {
 
         }
-    },[])
-    const handleFilterChange = useCallback(value => {
-
-        setFilters(value)
-    }, [])
+    }, [handleAddClick, setHeader, t])
 
     const handleApplyFilters = useCallback((value) => {
         setFilters(value)
@@ -48,10 +50,10 @@ const MyConferenceListContainer = () => {
         return <LoadingFakeText lines={10} />
     }
     return (
-    <>
-    <MyConferenceFilters filters={filters} onApplyFilters ={handleApplyFilters}/>
-    <MyConferenceList conferences = {data} />
-    </>
+        <>
+            <MyConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} />
+            <MyConferenceList conferences={data} />
+        </>
     )
 }
 
