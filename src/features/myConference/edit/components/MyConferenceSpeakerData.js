@@ -1,45 +1,46 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import { Td, Tr } from 'react-super-responsive-table'
 import PropTypes from 'prop-types'
-import { Tr, Td } from 'react-super-responsive-table'
-import { useTranslation } from 'react-i18next';
-import { Checkbox, makeStyles } from '@material-ui/core';
-import tableStyles from 'assets/jss/components/tableStyle';
-import CustomTextField from '@bit/totalsoft_oss.react-mui.custom-text-field';
-import DeleteButton from '@bit/totalsoft_oss.react-mui.delete-button';
+import { Checkbox, makeStyles } from '@material-ui/core'
+import CustomTextField from '@bit/totalsoft_oss.react-mui.custom-text-field'
+import DeleteButton from '@bit/totalsoft_oss.react-mui.delete-button'
+import { useTranslation } from 'react-i18next'
+import { onCheckBoxChange, onTextBoxChange } from 'utils/propertyChangeAdapters'
 
-const useStyles = makeStyles(tableStyles);
-
+const useStyles = makeStyles()
 const MyConferenceSpeakerData = (props) => {
-    const { speaker, dispatch, index } = props
-    const { t } = useTranslation();
-    const classes = useStyles();
+    const { t } = useTranslation()
+    const { speaker, dispatch } = props
+    const { id, name, nationality, rating, isMainSpeaker } = speaker
+    const classes = useStyles()
+    const handleDelete = useCallback(() => dispatch({ type: 'deleteSpeaker', payload: speaker.id }), [dispatch, speaker.id])
+    const handleGeneralDispatch = (type, prop) => value => dispatch({ type, payload: { id, [prop]: value } })
 
     return (
         <Tr>
-            <Td className = {classes.tableContent}>
-                <CustomTextField fullWidth />
+            <Td className={classes.tableContent}>
+                <CustomTextField fullWidth value={name} onChange={onTextBoxChange(handleGeneralDispatch('speakerName', 'name'))} />
             </Td>
-            <Td className = {classes.tableContent}>
-                <CustomTextField fullWidth />
+            <Td className={classes.tableContent}>
+                <CustomTextField fullWidth value={nationality} onChange={onTextBoxChange(handleGeneralDispatch('nationality', 'nationality'))} />
             </Td>
-            <Td className = {classes.tableContent}>
-                <CustomTextField fullWidth />
+            <Td className={classes.tableContent}>
+                <CustomTextField fullWidth isNumeric value={rating} onChange={handleGeneralDispatch('rating', 'rating')} />
             </Td>
-            <Td className = {classes.tableContent}>
-                <Checkbox color='secondary'/>
+            <Td className={classes.tableContent}>
+                <Checkbox color='secondary' checked={isMainSpeaker} onChange={onCheckBoxChange(handleGeneralDispatch('isMainSpeaker', 'isMainSpeaker'))} />
             </Td>
-            <Td className = {classes.tableContent}>
-                <DeleteButton title = {t('General.Buttons.DeleteSpeaker')} size='small' />
+            <Td className={classes.tableContent}>
+                <DeleteButton title={t('General.Buttons.DeleteSpeaker')} size='small' onClick={handleDelete} />
             </Td>
-
         </Tr>
-    )
-};
 
+    )
+}
 MyConferenceSpeakerData.propTypes = {
-    speaker: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    index: PropTypes.number.isRequired
+    speaker: PropTypes.object,
+    dispatch: PropTypes.func,
+    index: PropTypes.number
 }
 
-export default MyConferenceSpeakerData;
+export default MyConferenceSpeakerData

@@ -11,7 +11,7 @@ const MyConferenceHeader =(props)=>{
     return <Grid container justifyContent='flex-start' alignItems='center'>
         <Grid item xs={6} sm={9} lg={9} container justifyContent='flex-start'>
             <Typography variant='subtitle1' className={classes.title}>
-                {title}asdwf
+                {title}
             </Typography>
         </Grid>
         <Grid item xs={3} sm={3} lg={3} container justifyContent='flex-end' spacing={1}>

@@ -12,44 +12,44 @@
   "DECIMAL2": "{{number,intlDecimal2}}",
   "MyProfile": "My Profile",
   "Forbidden": "Not allowed to see this page!",
+  "General": {
+    "Buttons": {
+      "ApplyFilters": "Apply filters",
+      "ResetFilters": "Reset filters",
+      "AddConference": "Add Conference",
+      "Save": "Save",
+      "AddSpeaker": "Add speaker",
+      "DeleteSpeaker": "Delete speaker"
+    }
+  },
   "NavBar": {
-    "MyFirstMenu":"My First Menu",
+    "MyFirstMenu": "My First Menu",
     "Settings": "Settings",
     "Welcome": "Welcome",
     "Conference": "Conferences",
     "MyConferences": "My Conferences"
   },
   "LandingPage": {
-    "Title":"Welcome!",
-    "Subtitle":"Please enter your e-mail:",
+    "Title": "Welcome!",
+    "Subtitle": "Please enter your e-mail:",
     "BadEmail": "This is not a valid email!"
   },
-  "Conferences" : {
-    "Filters" : {
-      "StartDate" : "Start date",
-      "EndDate" : "End date"
+  "Conferences": {
+    "Filters": {
+      "StartDate": "Start date",
+      "EndDate": "End date"
     },
-    "Speaker":"Speaker : ",
+    "Speaker": "Speaker : ",
     "Attend": "Attend",
     "Join": "Join",
     "Withdraw": "Withdraw",
-  	"StatusNotSet": "Not attending"
+    "StatusNotSet": "Not attending"
   },
-"MyConferences": {
-  "Edit": "Edit",
-  "Delete":"Delete"
-},
-
-  "General":{
-    "Buttons":{
-      "ApplyFilters" : "Apply filters",
-      "ResetFilters" : "Reset filters",
-      "AddConference" : "Add Conference",
-      "Save":"Save",
-      "AddSpeaker": "Add speaker",
-      "DeleteSpeaker": "Delete speaker"
-    }
+  "MyConferences": {
+    "Edit": "Edit",
+    "Delete": "Delete"
   },
+  
   "Conference": {
     "Info": "Conference Info",
     "Location": "Location",
@@ -76,7 +76,7 @@
     "Longitude": "Longitude"
   },
   "UserMenu": {
-    "User" : "User"
+    "User": "User"
   },
   "Tooltips": {
     "Logout": "Logout",

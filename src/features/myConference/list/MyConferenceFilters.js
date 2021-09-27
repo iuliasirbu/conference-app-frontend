@@ -31,13 +31,13 @@ function MyConferenceFilters (props){
                 <Grid container spacing={5} onKeyDown={handleEnterPress}>
                     <Grid item> 
                         <DateTime
-                            label={t("Conference.Filters.StartDate")}
+                            label={t("Conferences.Filters.StartDate")}
                             clearable value={startDate} onChange={setStartDate}
                         /> 
                     </Grid>
                     <Grid item> 
                         <DateTime
-                            label={t("Conference.Filters.EndDate")}
+                            label={t("Conferences.Filters.EndDate")}
                             clearable value={endDate} onChange={setEndDate}
                         /> 
                     </Grid>
