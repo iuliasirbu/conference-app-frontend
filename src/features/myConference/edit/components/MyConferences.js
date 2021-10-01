@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { Grid } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import IconCard from '@bit/totalsoft_oss.react-mui.icon-card'

@@ -7,7 +7,8 @@ import { useRouteMatch } from 'react-router'
 import { categories, cities, counties, countries, types } from 'utils/mocks/conferenceDictionary'
 import { reducer, initialConference } from '../conferenceState'
 import MyConferences from './MyConferences'
-import {conference as mockConference} from 'utils/mocks/myConference'
+import { useQueryWithErrorHandling } from 'hooks/errorHandling'
+import {CONFERENCE_QUERY} from 'features/myConference/edit/gql/queries/conferenceQuery'
 
 
 
@@ -18,14 +19,13 @@ const MyConferenceContainer = () => {
     const match = useRouteMatch()
 
     const conferenceId = match.params.id
-    const isNew= conferenceId ==='new'
+    const isNew = conferenceId === 'new'
 
-    useEffect(()=>{
-        if(!isNew){
-            dispatch({type:'resetConference', payload:mockConference})
-        }
-   
-    },[] )// eslint-disable-line react-hooks/exhaustive-deps
+    const { loading: loadingConference } = useQueryWithErrorHandling(CONFERENCE_QUERY, {
+        variables: { id: conferenceId },
+        skip: isNew,
+        onCompleted: result => dispatch({ type: 'resetConference', payload: result.conference })
+    })
 
     useEffect(() => () => setHeader(null), []) // eslint-disable-line react-hooks/exhaustive-deps
     useEffect(() => {
@@ -33,7 +33,7 @@ const MyConferenceContainer = () => {
             <MyConferencesHeader title={conference.name} actions={<SaveButton title={t("General.Buttons.Save")} />} />)
     }, [conference.name, setHeader, t])
 
-    const { data, loading } = {
+    const { data } = {
         loading: false,
         data: {
             typeList: types,

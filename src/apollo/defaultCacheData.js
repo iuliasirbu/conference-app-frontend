@@ -1,4 +1,3 @@
-import { emptyString } from 'utils/constants'
 import { emptyObject } from 'utils/constants'
 import { yourEntityPager, yourEntityListFilter, emailKey } from './cacheKeyFunctions'
 
@@ -15,7 +14,7 @@ const yourEntityDefaultPager = {
 }
 const yourEntityDefaultListFilter = emptyObject
 
-const defaultEmail = {email:'asdfghj@asf.ro'}
+const defaultEmail = {email:'admin@totalsoft.ro'}
 
 export const defaults = {
   [emailKey]:defaultEmail,

@@ -1,9 +1,8 @@
 import { Grid, makeStyles } from '@material-ui/core'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table'
+import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table'
 import { useTranslation } from 'react-i18next'
-import { Speaker } from '@material-ui/icons'
 import MyConferenceSpeakerData from './MyConferenceSpeakerData'
 
 const MyConferenceSpeakers = (props) => {

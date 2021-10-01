@@ -4,7 +4,7 @@ import Settings from '@material-ui/icons/Settings'
 import HomeIcon from '@material-ui/icons/Home' 
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew'
 import Event from '@material-ui/icons/Event'
-import { EventNote, List } from '@material-ui/icons'
+import { EventNote } from '@material-ui/icons'
 
 const menuItems = [
   { icon: <HomeIcon />, text: 'NavBar.MyFirstMenu', path: '/helloWorld', name: 'MyFirstMenu' },

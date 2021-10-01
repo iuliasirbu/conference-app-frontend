@@ -39,7 +39,7 @@ function Welcome() {
         if (eveniment.keyCode===13){
           nuStiu()
         }
-    }
+    }, [nuStiu] 
   )
 
   return (

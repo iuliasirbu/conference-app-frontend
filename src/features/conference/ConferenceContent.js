@@ -1,5 +1,4 @@
 import React from 'react'
-import conferences from 'utils/mocks/attendeeList'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import attendeeStatus from 'constants/attendeeStatus'
@@ -13,9 +12,9 @@ const ConferenceContent = props => {
     const {t} = useTranslation()
     const noStatusSet = t('Conferences.StatusNotSet')
 
-    const showJoin = status.id === attendeeStatus.Attended
-    const showWithdrawn = status.id === attendeeStatus.Attended || status.id===attendeeStatus.Joined
-    const showAttend = status.id === attendeeStatus.Withdrawn
+    const showJoin = status?.id === attendeeStatus.Attended
+    const showWithdrawn = status?.id === attendeeStatus.Attended || status?.id===attendeeStatus.Joined
+    const showAttend = status?.id === attendeeStatus.Withdrawn
 
     const startDateFormatted = t('DATE_FORMAT', { date: { value: startDate, format: 'DD-MM-YYYY HH:mm' } })
     const endDateFormatted = t('DATE_FORMAT', { date: { value: endDate, format: 'DD-MM-YYYY HH:mm' } })
