@@ -14,7 +14,9 @@ import DialogDisplay from '@bit/totalsoft_oss.react-mui.dialog-display'
 import ConferenceCodeModal from './ConferenceCodeModal'
 import { useToast } from '@bit/totalsoft_oss.react-mui.kit.core'
 import { useTranslation } from 'react-i18next'
-import { emptyString } from 'utils/constants'
+import { emptyArray, emptyString } from 'utils/constants'
+import WITHDRAW_CONFERENCE from '../conference/gql/mutations/WithdrawConference'
+
 
 function ConferenceListContainer() {
     const showError = useError()
@@ -22,6 +24,8 @@ function ConferenceListContainer() {
     const { t } = useTranslation()
     const [code, setCode] = useState()
     const [open, setOpen] = useState(false)
+    const [suggestedConferences, setSuggestedConferences] = useState(emptyArray)
+
     const [filters, setFilters] = useState(generateDefaultFilters)
     const [pager, setPager] = useState({ totalCount: 25, page: 0, pageSize: 3 })
     const [email] = useEmail()
@@ -35,12 +39,13 @@ function ConferenceListContainer() {
             setPager(state => ({ ...state, totalCount }))
         }
     })
-    
+
     const [attend] = useMutation(ATTEND_CONFERENCE, {
         onError: showError,
         onCompleted: result => {
             if (result?.attend) {
-                setCode(result?.attend)
+                setCode(result?.attend.code)
+                setSuggestedConferences(result?.attend?.suggestedConferences)
                 setOpen(true)
                 addToast(t('Conferences.SuccessfullyAttended', 'success'))
             }
@@ -64,6 +69,28 @@ function ConferenceListContainer() {
         refetch()
     },[refetch]
     )
+
+    const [withdraw] = useMutation(WITHDRAW_CONFERENCE, {
+        onCompleted: () => {
+          addToast(t('Conferences.SuccessfullyWithdrawn'))
+          refetch()
+        },
+        onError: showError
+      })
+    
+      const handleWithdraw = useCallback(
+        conferenceId => () => {
+          withdraw({
+            variables: {
+              input: {
+                conferenceId,
+                attendeeEmail: email
+              }
+            }
+          })
+        },
+        [email, withdraw]
+      )
 
     const handleRowsPerPageChange = useCallback((pageSize) => {
         setPager((state) => ({ ...state, pageSize: parseInt(pageSize) }))
@@ -92,8 +119,8 @@ function ConferenceListContainer() {
     return (
         <>
             <ConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} />
-            <ConferenceList conferences={data?.conferenceList?.values} onAttend={handleAttend} />
-            <DialogDisplay id='showQRCode' open={open} onClose={handleClose }content={<ConferenceCodeModal code={code} />} />
+            <ConferenceList conferences={data?.conferenceList?.values} onAttend={handleAttend} onWithdraw={handleWithdraw}/>
+            <DialogDisplay id='showQRCode' open={open} onClose={handleClose }content={<ConferenceCodeModal code={code} suggestedConferences={suggestedConferences} onAttend={handleAttend}/>} />
         </>
     )
 }
