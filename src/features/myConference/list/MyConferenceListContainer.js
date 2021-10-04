@@ -21,7 +21,7 @@ function MyConferenceListContainer() {
     const [, setHeader] = useHeader()
     const [, setFooter] = useFooter()
     const [email] = useEmail()
-    const [pager, setPager] = useState({ totalCount: 0, page: 0, pageSize: 5 })
+    const [pager, setPager] = useState({ totalCount: 0, page: 0, pageSize: 3 })
 
     const handleRowsPerPageChange = useCallback((pageSize) => {
         setPager((state) => ({ ...state, pageSize: parseInt(pageSize) }))

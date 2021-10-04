@@ -5,6 +5,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import PropTypes from "prop-types"
 import { onTextBoxChange } from 'utils/propertyChangeAdapters';
+import { emptyString } from 'utils/constants';
 
 
 const MyConferenceLocation = (props) => {
@@ -19,7 +20,7 @@ const MyConferenceLocation = (props) => {
                 <CustomTextField
                     label={t('Location.Name')}
                     fullWidth
-                    value={name}
+                    value={name??emptyString}
                     onChange={onTextBoxChange(handleDispatch('locationName'))}
                 />
             </Grid>
@@ -27,7 +28,7 @@ const MyConferenceLocation = (props) => {
                 <CustomTextField
                     label={t('Location.Address')}
                     fullWidth
-                    value={address}
+                    value={address??emptyString}
                     onChange={onTextBoxChange(handleDispatch('address'))}
                 />
             </Grid>
@@ -39,10 +40,9 @@ const MyConferenceLocation = (props) => {
                     createdLabel='Location.Country'
                     fullWidth
                     isClearable
-                    isSearchable
                     creatable
                     options={countries}
-                    value={country}
+                    value={country??emptyString}
                     onChange={handleDispatch('country')}
                 />
             </Grid>
@@ -52,10 +52,9 @@ const MyConferenceLocation = (props) => {
                     createdLabel='Location.County'
                     fullWidth
                     isClearable
-                    isSearchable
                     creatable
                     options={counties}
-                    value={county}
+                    value={county??emptyString}
                     onChange={handleDispatch('county')}
                 />
             </Grid>
@@ -65,10 +64,9 @@ const MyConferenceLocation = (props) => {
                     createdLabel='Location.City'
                     fullWidth
                     isClearable
-                    isSearchable
                     creatable
                     options={cities}    
-                    value={city}
+                    value={city??emptyString}
                     onChange={(handleDispatch('city'))}
                 />
             </Grid>
@@ -78,7 +76,7 @@ const MyConferenceLocation = (props) => {
                 <CustomTextField
                     label={t('Location.Latitude')}
                     fullWidth
-                    value={latitude}
+                    value={latitude??emptyString}
                     onChange={onTextBoxChange(handleDispatch('latitude'))}
                 />
             </Grid>
@@ -86,7 +84,7 @@ const MyConferenceLocation = (props) => {
                 <CustomTextField
                     label={t('Location.Longitude')}
                     fullWidth
-                    value={longitude}
+                    value={longitude??emptyString}
                     onChange={onTextBoxChange(handleDispatch('longitude'))}
                 />
             </Grid>

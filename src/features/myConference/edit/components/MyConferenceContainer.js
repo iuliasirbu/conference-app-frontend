@@ -4,13 +4,12 @@ import { useHeader } from 'providers/AreasProvider'
 import React, { useEffect, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useRouteMatch } from 'react-router'
-import { categories, cities, counties, countries, types } from 'utils/mocks/conferenceDictionary'
 import { reducer, initialConference } from '../conferenceState'
 import MyConferences from './MyConferences'
 import { useQueryWithErrorHandling } from 'hooks/errorHandling'
-import {CONFERENCE_QUERY} from 'features/myConference/edit/gql/queries/conferenceQuery'
-
-
+import { CONFERENCE_QUERY } from 'features/myConference/edit/gql/queries/conferenceQuery'
+import { DICTIONARY_QUERY } from 'features/conference/gql/queries/DictionaryQuery'
+import LoadingFakeText from '@bit/totalsoft_oss.react-mui.fake-text/dist/LoadingFakeText'
 
 const MyConferenceContainer = () => {
     const { t } = useTranslation()
@@ -22,9 +21,8 @@ const MyConferenceContainer = () => {
     const isNew = conferenceId === 'new'
 
     const { loading: loadingConference } = useQueryWithErrorHandling(CONFERENCE_QUERY, {
-        variables: { id: conferenceId },
-        skip: isNew,
-        onCompleted: result => dispatch({ type: 'resetConference', payload: result.conference })
+        variables: { id: conferenceId, isNew },
+        onCompleted: result => result?.conference && dispatch({ type: 'resetConference', payload: result.conference })
     })
 
     useEffect(() => () => setHeader(null), []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -33,16 +31,9 @@ const MyConferenceContainer = () => {
             <MyConferencesHeader title={conference.name} actions={<SaveButton title={t("General.Buttons.Save")} />} />)
     }, [conference.name, setHeader, t])
 
-    const { data } = {
-        loading: false,
-        data: {
-            typeList: types,
-            categoryList: categories,
-            countryList: countries,
-            countyList: counties,
-            cityList: cities
-        }
-    }
+    const { data, loading } = useQueryWithErrorHandling(DICTIONARY_QUERY)
+
+    if (loading || loadingConference) return <LoadingFakeText lines={10} />
 
     return <MyConferences
         conference={conference}

@@ -3,25 +3,31 @@ import ConferenceFilters from './ConferenceFilters'
 import ConferenceList from './ConferenceList'
 import LoadingFakeText from '@bit/totalsoft_oss.react-mui.fake-text'
 import { extractPager, generateDefaultFilters } from 'utils/functions'
-import { useQueryWithErrorHandling } from 'hooks/errorHandling'
+import { useError, useQueryWithErrorHandling } from 'hooks/errorHandling'
 import CONFERENCE_LIST_QUERY from '../conference/gql/queries/ConferenceListQuery'
 import { useEmail } from 'hooks/useEmail'
 import { useFooter } from 'providers/AreasProvider'
 import Pagination from '@bit/totalsoft_oss.react-mui.pagination'
+import { useMutation } from '@apollo/client'
+import ATTEND_CONFERENCE from '../conference/gql/mutations/AttendConference'
+import DialogDisplay from '@bit/totalsoft_oss.react-mui.dialog-display'
+import ConferenceCodeModal from './ConferenceCodeModal'
+import { useToast } from '@bit/totalsoft_oss.react-mui.kit.core'
+import { useTranslation } from 'react-i18next'
+import { emptyString } from 'utils/constants'
 
 function ConferenceListContainer() {
+    const showError = useError()
+    const addToast = useToast()
+    const { t } = useTranslation()
+    const [code, setCode] = useState()
+    const [open, setOpen] = useState(false)
     const [filters, setFilters] = useState(generateDefaultFilters)
     const [pager, setPager] = useState({ totalCount: 25, page: 0, pageSize: 3 })
     const [email] = useEmail()
     const [, setFooter] = useFooter()
     useEffect(() => () => setFooter(null), [])    // eslint-disable-line react-hooks/exhaustive-deps
-    
-    const handleRowsPerPageChange = useCallback((pageSize) => {
-        setPager((state) => ({ ...state, pageSize: parseInt(pageSize) }))
-    }, [])
-    const handlePageChange = useCallback((page) => {
-        setPager((state) => ({ ...state, page }))
-    }, [])
+
     const { data, loading, refetch } = useQueryWithErrorHandling(CONFERENCE_LIST_QUERY, {
         variables: { pager: extractPager(pager), filters, email },
         onCompleted: (result) => {
@@ -29,6 +35,43 @@ function ConferenceListContainer() {
             setPager(state => ({ ...state, totalCount }))
         }
     })
+    
+    const [attend] = useMutation(ATTEND_CONFERENCE, {
+        onError: showError,
+        onCompleted: result => {
+            if (result?.attend) {
+                setCode(result?.attend)
+                setOpen(true)
+                addToast(t('Conferences.SuccessfullyAttended', 'success'))
+            }
+        }
+    })
+    const handleAttend = useCallback(
+        conferenceId => () => {
+            attend({
+                variables: {
+                    input: {
+                        conferenceId,
+                        attendeeEmail: email
+                    }
+                }
+            })
+        }, [attend, email])
+
+    const handleClose = useCallback( ()=>{
+        setOpen(false)
+        setCode(emptyString)
+        refetch()
+    },[refetch]
+    )
+
+    const handleRowsPerPageChange = useCallback((pageSize) => {
+        setPager((state) => ({ ...state, pageSize: parseInt(pageSize) }))
+    }, [])
+    const handlePageChange = useCallback((page) => {
+        setPager((state) => ({ ...state, page }))
+    }, [])
+    
     useEffect(() => {
         setFooter(<Pagination
             totalCount={pager.totalCount}
@@ -49,7 +92,8 @@ function ConferenceListContainer() {
     return (
         <>
             <ConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} />
-            <ConferenceList conferences={data?.conferenceList?.values} />
+            <ConferenceList conferences={data?.conferenceList?.values} onAttend={handleAttend} />
+            <DialogDisplay id='showQRCode' open={open} onClose={handleClose }content={<ConferenceCodeModal code={code} />} />
         </>
     )
 }
