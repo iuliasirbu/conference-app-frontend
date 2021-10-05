@@ -51,7 +51,8 @@
   },
   "MyConferences": {
     "Edit": "Edit",
-    "Delete": "Delete"
+    "Delete": "Delete",
+    "SavingSucceeded": "Conference was successfully saved"
   },
   
   "Conference": {

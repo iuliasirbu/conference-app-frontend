@@ -35,7 +35,8 @@
   },
   "MyConferences": {
     "Edit": "Editeaza",
-    "Delete":"Sterge"
+    "Delete":"Sterge",
+    "SavingSucceeded":"Conferinta a fost salvata cu succes"
   },
   "General":{
     "Buttons":{

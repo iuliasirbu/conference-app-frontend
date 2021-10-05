@@ -1,6 +1,6 @@
 import {gql} from '@apollo/client'
 
-const Fragments ={
+const CommonFragments ={
     country: gql`
     fragment country on Country{
         id
@@ -31,4 +31,4 @@ const Fragments ={
     }`
 }
 
-export default Fragments
+export default CommonFragments
