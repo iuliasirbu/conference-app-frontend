@@ -16,6 +16,8 @@ import { useToast } from '@bit/totalsoft_oss.react-mui.kit.core'
 import { useTranslation } from 'react-i18next'
 import { emptyArray, emptyString } from 'utils/constants'
 import WITHDRAW_CONFERENCE from '../conference/gql/mutations/WithdrawConference'
+import JOIN_CONFERENCE from '../conference/gql/mutations/JoinConference'
+import { useHistory } from 'react-router'
 
 
 function ConferenceListContainer() {
@@ -25,7 +27,7 @@ function ConferenceListContainer() {
     const [code, setCode] = useState()
     const [open, setOpen] = useState(false)
     const [suggestedConferences, setSuggestedConferences] = useState(emptyArray)
-
+    const history = useHistory()
     const [filters, setFilters] = useState(generateDefaultFilters)
     const [pager, setPager] = useState({ totalCount: 25, page: 0, pageSize: 3 })
     const [email] = useEmail()
@@ -92,6 +94,29 @@ function ConferenceListContainer() {
         [email, withdraw]
       )
 
+    const [join] = useMutation(JOIN_CONFERENCE, {
+        onCompleted:()=>{
+            addToast(t('Conferences.SuccessfullyJoined'))
+            refetch()
+        },
+        onError:showError
+    })
+
+    const handleJoin = useCallback(
+        conferenceId=> ()=> {
+            join({
+                variables:{
+                    input:{
+                        conferenceId,
+                        attendeeEmail:email
+                    }
+                }
+            })
+            history.push(`/conferences/join/${conferenceId}`)
+        }, [email, history, join]
+    )
+
+
     const handleRowsPerPageChange = useCallback((pageSize) => {
         setPager((state) => ({ ...state, pageSize: parseInt(pageSize) }))
     }, [])
@@ -119,7 +144,7 @@ function ConferenceListContainer() {
     return (
         <>
             <ConferenceFilters filters={filters} onApplyFilters={handleApplyFilters} />
-            <ConferenceList conferences={data?.conferenceList?.values} onAttend={handleAttend} onWithdraw={handleWithdraw}/>
+            <ConferenceList conferences={data?.conferenceList?.values} onAttend={handleAttend} onWithdraw={handleWithdraw} onJoin={handleJoin}/>
             <DialogDisplay id='showQRCode' open={open} onClose={handleClose }content={<ConferenceCodeModal code={code} suggestedConferences={suggestedConferences} onAttend={handleAttend}/>} />
         </>
     )

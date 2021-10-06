@@ -84,7 +84,7 @@ const MyConferenceContainer = () => {
     }, [conference.name, setHeader, t])
 
 
-    const { data, loading } = useQueryWithErrorHandling(DICTIONARY_QUERY)
+    const { data } = useQueryWithErrorHandling(DICTIONARY_QUERY)
 
     if (loadingConference || saving) return <LoadingFakeText lines={10} />
 

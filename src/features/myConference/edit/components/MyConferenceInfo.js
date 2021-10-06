@@ -31,6 +31,7 @@ const MyConferenceInfo = (props) => {
                         value={startDate}
                         onChange={handleChange('startDate')}
                         showTime={true}
+                        views={['date', 'hours', 'minutes']}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
@@ -39,6 +40,7 @@ const MyConferenceInfo = (props) => {
                         value={endDate}
                         onChange={handleChange('endDate')}
                         showTime={true}
+                        views={['date', 'hours', 'minutes']}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6} lg={3}>
