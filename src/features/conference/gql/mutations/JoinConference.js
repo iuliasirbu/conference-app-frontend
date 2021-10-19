@@ -1,11 +1,8 @@
-import {gql} from '@apollo/client'
+import {gql} from "@apollo/client"
 
-export const JOIN_CONFERENCE = gql`
-query joinedAttendees($id: ID!) {
-  joinedAttendees(id: $id){
-    conferenceId
-    attendeeEmail
-  }
-}
-`
+export const JOIN_CONFERENCE=gql`
+mutation join($input:Attendee){
+    join(input:$input)
+}`
+
 export default JOIN_CONFERENCE

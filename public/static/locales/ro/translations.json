@@ -44,7 +44,7 @@
     "Buttons":{
       "ApplyFilters" : "Aplica filtre",
       "ResetFilters" : "Reseteaza filtre",
-      "AddConference" : "Adauga Conferinta",
+      "Add" : "Adauga Conferinta",
       "Save": "Salveaza",
       "AddSpeaker": "Adauga orator",
       "DeleteSpeaker": "Sterge orator"

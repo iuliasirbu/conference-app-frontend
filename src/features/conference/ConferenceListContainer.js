@@ -16,7 +16,7 @@ import { useToast } from '@bit/totalsoft_oss.react-mui.kit.core'
 import { useTranslation } from 'react-i18next'
 import { emptyArray, emptyString } from 'utils/constants'
 import WITHDRAW_CONFERENCE from '../conference/gql/mutations/WithdrawConference'
-import JOIN_CONFERENCE from '../conference/gql/mutations/JoinConference'
+import JOIN_CONFERENCE from './gql/mutations/JoinConference'
 import { useHistory } from 'react-router'
 
 
@@ -50,6 +50,7 @@ function ConferenceListContainer() {
                 setSuggestedConferences(result?.attend?.suggestedConferences)
                 setOpen(true)
                 addToast(t('Conferences.SuccessfullyAttended', 'success'))
+                refetch()
             }
         }
     })
@@ -116,6 +117,7 @@ function ConferenceListContainer() {
         }, [email, history, join]
     )
 
+    
 
     const handleRowsPerPageChange = useCallback((pageSize) => {
         setPager((state) => ({ ...state, pageSize: parseInt(pageSize) }))

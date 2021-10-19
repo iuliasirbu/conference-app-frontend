@@ -16,7 +16,7 @@
     "Buttons": {
       "ApplyFilters": "Apply filters",
       "ResetFilters": "Reset filters",
-      "AddConference": "Add Conference",
+      "Add": "Add Conference",
       "Save": "Save",
       "AddSpeaker": "Add speaker",
       "DeleteSpeaker": "Delete speaker"
