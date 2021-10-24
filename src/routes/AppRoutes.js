@@ -12,7 +12,7 @@ import { useEmail } from 'hooks/useEmail'
 import ConferenceListContainer from 'features/conference/ConferenceListContainer'
 import MyConferenceListContainer from 'features/myConference/list/MyConferenceListContainer'
 import MyConferenceContainer from 'features/myConference/edit/components/MyConferenceContainer'
-import ConferenceJoin from 'features/conference/ConferenceJoin'
+import ConferenceJoin from 'features/conference/join/ConferenceJoin'
 
 export default function AppRoutes() {
   const [email] = useEmail()

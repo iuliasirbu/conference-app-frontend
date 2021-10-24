@@ -1,14 +1,10 @@
 import React from "react"
-import { useTranslation } from "react-i18next"
-import PropTypes from 'prop-types'
-import { Grid } from "@material-ui/core"
 import { useQueryWithErrorHandling } from "hooks/errorHandling"
-import JOINED_ATTENDEES from "./gql/queries/JoinedAttendees"
+import JOINED_ATTENDEES from "features/conference/gql/queries/JoinedAttendees"
 import { useRouteMatch } from "react-router"
 import { LoadingFakeText, Typography } from '@bit/totalsoft_oss.react-mui.kit.core'
 
-function ConferenceJoin() {
-    const { t } = useTranslation()
+function ConferenceJoinAttendees() {
     const match = useRouteMatch()
     const conferenceId = match.params.id
 
@@ -26,8 +22,4 @@ function ConferenceJoin() {
 
 }
 
-export default ConferenceJoin
-
-
-
-
+export default ConferenceJoinAttendees

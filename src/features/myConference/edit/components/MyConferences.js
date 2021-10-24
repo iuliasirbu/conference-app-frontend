@@ -5,7 +5,6 @@ import IconCard from '@bit/totalsoft_oss.react-mui.icon-card'
 import { Face, Info, LocationOn } from '@material-ui/icons'
 import CardTitle from '@bit/totalsoft_oss.react-mui.card-title'
 import AddButton from '@bit/totalsoft_oss.react-mui.add-button'
-
 import MyConferenceLocation from './MyConferenceLocation'
 import MyConferenceSpeakers from './MyConferenceSpeakers'
 import MyConferenceInfo from './MyConferenceInfo'

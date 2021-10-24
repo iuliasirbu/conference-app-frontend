@@ -19,9 +19,11 @@
       "Add": "Add Conference",
       "Save": "Save",
       "AddSpeaker": "Add speaker",
-      "DeleteSpeaker": "Delete speaker"
+      "DeleteSpeaker": "Delete speaker",
+      "Exit": "Exit Conference"
     },
-    "SuggestedConferences":"Based on your choice, we suggest the following conferences:"
+    "SuggestedConferences":"Based on your choice, we suggest the following conferences:",
+    "JoinedAttendees":"Attendees:"
   },
   "NavBar": {
     "MyFirstMenu": "My First Menu",

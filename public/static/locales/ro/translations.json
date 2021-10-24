@@ -47,9 +47,13 @@
       "Add" : "Adauga Conferinta",
       "Save": "Salveaza",
       "AddSpeaker": "Adauga orator",
-      "DeleteSpeaker": "Sterge orator"
+      "DeleteSpeaker": "Sterge orator",
+      "Exit": "Iesi din Conferinta"
+
     },
-    "SuggestedConferences":"Pe baza alegerilor facute, va recomandam:"
+    "SuggestedConferences":"Pe baza alegerilor facute, va recomandam:",
+    "JoinedAttendees":"Participanti:"
+
   },
   "Conference": {
     "Info": "Informatii Conferinta",
